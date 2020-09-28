@@ -58,7 +58,7 @@ namespace testDemoClient.Controllers
             {
                 client.BaseAddress = new Uri("http://localhost:51933/api/");
                 //HTTP POST
-                var postTask = client.PostAsJsonAsync<LoginRequest>("", loginRequest);
+                var postTask = client.PostAsJsonAsync<LoginRequest>("account/login", loginRequest);
                 postTask.Wait();
 
                 var result = postTask.Result;
