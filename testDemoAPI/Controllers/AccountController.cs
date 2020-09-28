@@ -21,13 +21,53 @@ namespace testDemoAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Account
+        // GET: api/Account/Login
         [HttpGet("Login")]
         public IEnumerable<LoginRequest> GetloginRequests()
         {
             return _context.loginRequests;
         }
 
+        // POST: api/Account/Login
+        [HttpPost("Login")]
+        public async Task<IActionResult> PostLoginRequest([FromBody] LoginRequest loginRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _context.loginRequests.Add(loginRequest);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetLoginRequest", new { id = loginRequest.userName }, loginRequest);
+        }
+
+        // GET: api/User
+        [HttpGet("User")]
+        public IEnumerable<TableUser> GettableUsers()
+        {
+            return _context.tableUsers;
+        }
+
+        // POST: api/User
+        [HttpPost("User")]
+        public async Task<IActionResult> PostTableUser([FromBody] TableUser tableUser)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _context.tableUsers.Add(tableUser);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetTableUser", new { id = tableUser.id }, tableUser);
+        }
+
+        #region
+        /**
+         * 
         // GET: api/Account/5
         [HttpGet("Login/{id}")]
         public async Task<IActionResult> GetLoginRequest([FromRoute] string id)
@@ -82,21 +122,6 @@ namespace testDemoAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Account
-        [HttpPost("Login")]
-        public async Task<IActionResult> PostLoginRequest([FromBody] LoginRequest loginRequest)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _context.loginRequests.Add(loginRequest);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetLoginRequest", new { id = loginRequest.userName }, loginRequest);
-        }
-
         // DELETE: api/Account/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteLoginRequest([FromRoute] string id)
@@ -122,5 +147,7 @@ namespace testDemoAPI.Controllers
         {
             return _context.loginRequests.Any(e => e.userName == id);
         }
+        **/
+        #endregion
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace testDemoAPI
+namespace testDemoClient
 {
     public class Program
     {
@@ -18,9 +18,7 @@ namespace testDemoAPI
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)                
+            WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
     }
-
-    //change something for github
 }

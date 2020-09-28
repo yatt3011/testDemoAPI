@@ -37,7 +37,9 @@ namespace testDemoAPI.Controllers
                 .Include(wd => wd.wellDummies);
         }
 
-        /*
+        #region
+        /**
+         * 
         // GET: api/PlatformWell/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPlatform([FromRoute] int id)
@@ -133,5 +135,6 @@ namespace testDemoAPI.Controllers
             return _context.platforms.Any(e => e.platformId == id);
         }
         */
+        #endregion
     }
 }
